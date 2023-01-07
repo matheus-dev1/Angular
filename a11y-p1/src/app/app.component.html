@@ -1,0 +1,29 @@
+<main>
+  <h1 tabindex="0">Form</h1>
+  <!-- (valueChange)="valueChangeRecive($event)" - È o valor que eu estou passando para o meu eventEmitter. -->
+
+  <!-- Eu também posso fazer um toWay data Biding [(value)]="yesNoAnswer" essa sintaxe só funciona porque para o input tem o mesmo nome do output, mas o output tem o sufixo change. -->
+  <form [formGroup]="form" (ngSubmit)="submit($event)">
+    <app-yes-no-button-group
+      [appDisableControl]="false"
+      [label]="'Are you good enough in Angular?'"
+      formControlName="yesNoAnswer"
+    >
+    </app-yes-no-button-group>
+    <br />
+    <button type="submit">Submit</button>
+  </form>
+  <br/>
+  <div
+    [attr.aria-labelledby]="id"
+  >
+    <span
+      [attr.id]="id"
+      tabindex="0"
+    >
+      YesNoAnswer value: {{
+        returnYesNoButtonValue(form.get("yesNoAnswer")?.value)
+      }}
+    </span>
+  </div>
+</main>

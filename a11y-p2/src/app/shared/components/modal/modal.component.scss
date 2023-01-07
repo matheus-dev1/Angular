@@ -1,0 +1,40 @@
+/* Como funciona um Modal?
+Um modal basicamente é basicamente um componente que já está na tela e normalmente é acionado por algum evento. */
+
+/*:host {
+  transition: 1s;
+  opacity: 0;
+  &.show {
+    opacity: 1;
+  }
+}*/
+
+.modal-overlay {
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0 , 0, 0.3);
+  .modal-content {
+    // 2 rem é a margin padrão do body que nosso nosso caso é 16px
+    padding: 0 2rem 2rem 2rem;
+    margin: 2%;
+    min-width: 94%;
+    @media(min-width: 600px) {
+      min-width: 60%;
+    }
+    border-radius: 4px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, .25);
+    background-color: white;
+    .modal-title {
+      border-bottom: solid 1px;
+      padding-bottom: 1rem;
+      margin-bottom: 2rem;
+    }
+  }
+}

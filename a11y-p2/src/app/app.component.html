@@ -1,0 +1,145 @@
+<h1
+>
+  Accessible Modal Component
+</h1>
+
+<p
+>
+  Welcome to the accessible modal testing page!
+</p>
+
+<button
+  class="button button-primary"
+  type="button"
+  (click)="show()"
+>
+  Show Modal
+</button>
+
+<ng-template #modalTemplate>
+  <form [formGroup]="formGroup" (ngSubmit)="submit()">
+    <div
+      class="form-field"
+    >
+      <label
+        for="firstName"
+      >
+        First Name
+      </label>
+      <!--[(value)]="firstName"-->
+      <input
+        id="firstName"
+        type="text"
+        formControlName="firstName"
+        aria-describedby="firstName-error"
+        [attr.aria-invalid]="formGroup.get('firstName').invalid"
+      />
+      <span
+        id="firstName-error"
+        class="validation-error"
+        *ngIf="formGroup.get('firstName')?.errors?.required"
+      >
+        First Name is Required
+      </span>
+    </div>
+
+    <div
+      class="form-field"
+    >
+      <label
+        for="surname"
+      >
+        Surname
+      </label>
+      <input
+        id="surname"
+        type="text"
+        formControlName="surname"
+        aria-describedby="surname-error"
+        [attr.aria-invalid]="formGroup.get('surname').invalid"
+      />
+      <span
+        id="surname-error"
+        class="validation-error"
+        *ngIf="formGroup.get('surname')?.errors?.required"
+      >
+        Surname is Required
+      </span>
+    </div>
+
+    <div
+      class="form-field"
+    >
+      <label
+        for="age"
+      >
+        Age
+      </label>
+      <input
+        id="age"
+        type="text"
+        formControlName="age"
+        aria-describedby="age-error"
+        [attr.aria-invalid]="formGroup.get('age').invalid"
+      />
+      <span
+        id="age-error"
+        class="validation-error"
+        *ngIf="formGroup.get('age')?.errors?.required"
+      >
+        Age is Required
+      </span>
+    </div>
+
+    <label
+      for="info"
+    >
+      Subscribe for newsletter
+    </label>
+    <input
+      id="info"
+      type="checkbox"
+      formControlName="info"
+      (change)="info = !info"
+    />
+    <!--[@fade]-->
+    <p
+      *ngIf="info"
+    >
+    This is a placeholder for more information
+    </p>
+
+    <div
+      class="button-group"
+    >
+      <button
+        class="button button-primary"
+        type="submit"
+        [attr.aria-disabled]="formGroup.invalid"
+      >
+        Submit
+      </button>
+
+      <button
+        class="button button-secondary"
+        type="button"
+        (click)="modalRef.close()"
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
+</ng-template>
+
+<ng-template #test1>
+  <p>test 1</p>
+</ng-template>
+
+<ng-template #test2>
+  <p>test 2</p>
+</ng-template>
+
+<ng-content
+  *ngTemplateOutlet="selectedTemplate"
+>
+</ng-content>

@@ -1,0 +1,95 @@
+<div
+  class="button-group"
+  role="radiogroup"
+  [attr.aria-label]="label"
+  >
+    <label
+      [attr.id]="id"
+      class="label"
+    >
+      {{ label }}
+    </label>
+
+    <div
+      class="radio"
+    >
+      <input
+        [attr.id]="id + '-yes'"
+        type="radio"
+        [attr.name]="id"
+        [attr.checked]="value === options.YES"
+        (change)="activate(options.YES)"
+      />
+      <label
+        class="button button-yes"
+        [attr.for]="id + '-yes'"
+      >
+        Yes
+      </label>
+    </div>
+
+    <div
+      class="radio"
+    >
+    <input
+      [attr.id]="id + '-no'"
+      type="radio"
+      [attr.name]="id"
+      [attr.checked]="value === options.NO"
+      (change)="activate(options.NO)"
+    />
+    <label
+      class="button button-no"
+      [attr.for]="id + '-no'"
+    >
+      No
+    </label>
+  </div>
+</div>
+<br/>
+
+<!-- Com este propriedade role, eu falo o que o essa minha div vai ser, neste caso mesmo usando um button, eu quero simular um radio button -->
+<!-- aria-labelledby="label", e você coloca o id de quem passa o label desse elemento, ou seja, esse meu radio button group é explicado por esse meu label, ou seja, ele fala o conteudo do id label, e ele lê apenas uma vez dentro do contexto do radio button, ou seja se eu tenho 2 radio buttons dentro de um radio button group, ele fala apenas quando aparecer no primeiro e quando passar para o proximo, ele não fala. -->
+<div
+  appKeyboardManager
+  role="radiogroup"
+  [attr.aria-labelledby]="id"
+  class="button-group"
+  >
+  <!-- Neste caso do id eu poderia ter feito id="{{id}}" e aria-labelledb={{id}}-->
+    <label [attr.id]="id" class="label"> {{ label }}</label>
+    <!-- Role, como eu quero que ele se comporte, neste caso como se fosse um raio button -->
+    <!-- Quando você quer fazer data binding com atributos do ARIA, como esses atributos são propriedades, são atributos do elemento, você tem que usar o attr. -->
+    <!-- Um elemento disabled não ganha foco em um text reader(NVDA)
+    Existem atributos que para funcionar apenas tem que estar presente ou ausente, no caso do disabled, então mesma que eu atribua o valor a propriedade  disabled, ele esta presente no elemento.
+    O null quando é retornado em um binding de atributo([attr.disable]), ele ignora e não cria o atributo. -->
+    <button
+      appKeyboardManagedItem
+      (focused)="activate(options.YES)"
+      role="radio"
+      [attr.disabled]="disabled ? disabled : null"
+      class="button button-yes"
+      type="button"
+      (click)="activate(options.YES)"
+      [attr.aria-checked]="ariaChecked(options.YES)"
+      [attr.tabindex]="tabIndexChecked(options.YES)"
+      [class.button-pressed]="buttonPressed(options.YES)"
+    >
+      Yes
+    </button>
+    <!-- Agora todo elemento que tem a diretiva KeyboardManagedItem pode responder ao evento focused. -->
+    <button
+      appKeyboardManagedItem
+      (focused)="activate(options.NO)"
+      role="radio"
+      [attr.disabled]="disabled ? disabled : null"
+      class="button button-no"
+      type="button"
+      (click)="activate(options.NO)"
+      [attr.aria-checked]="ariaChecked(options.NO)"
+      [attr.tabindex]="tabIndexChecked(options.NO)"
+      [class.button-pressed]="buttonPressed(options.NO)"
+    >
+      No
+    </button>
+</div>

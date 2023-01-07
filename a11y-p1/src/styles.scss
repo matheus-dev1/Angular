@@ -1,0 +1,13 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Open Sans'n sans-serif;
+  color: #272c3f;
+}
+
+// Em elementos focados ele deve ter este tipo de estilização.
+:focus {
+  outline: 2px solid pink;
+}
