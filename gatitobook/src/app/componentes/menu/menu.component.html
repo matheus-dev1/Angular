@@ -1,0 +1,15 @@
+<!-- Eu vou colocar a classe active-menu, quando a variavel "mostraMenu" for true
+
+(keyup.space)="abreMenu()" quando clicar no espaço do teclado eu vou executar o abreMenu() -->
+<div [ngClass]="{ 'active-menu': mostraMenu}">
+  <div class="menu-bar">
+    <i
+      class="fa fa-window-close"
+      (click)="abreMenu()"
+      (keyup.space)="abreMenu()"
+    >
+    </i>
+    <ng-content></ng-content>
+  </div>
+  <div class="overlay" (click)="abreMenu()"></div>
+</div>

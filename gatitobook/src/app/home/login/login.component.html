@@ -1,0 +1,43 @@
+<h4 class="text-center">Login</h4>
+<form class="form mt-4" (ngSubmit)="login()" #loginForm="ngForm">
+  <div class="form-group">
+    <!-- O ngModel é um modelo padrão que um formulário cria e instancia no momento em que você está utilizando um formulário Angular template.
+
+    Essa sintaxe entre colchete e parênteses é o que nós chamamos de two way data binding ou em uma tradução livre, “comunicação de duas vias”. Isso significa que o Angular vai falar o meio de campo da comunicação do HTML para o modelo no meu componente e vice-versa. Toda vez que eu alterar o modelo, ele vai alterar o meu HTML. Eu estou mapeando esse input para o atributo usuário.
+
+    #, esse caractere faz com que consigamos criar uma variável de referência dentro do nosso template.
+
+    Assim como o ngModel colocou o conteúdo desse campo em um atributo chamado de Usuario, também podemos pegar o estado desse input utilizando a nossa variável de referência.
+    -->
+    <input
+      class="form-control mb-2"
+      type="text"
+      placeholder="Nome do Usúario"
+      [(ngModel)]="usuario"
+      name="usuario"
+      #campoUsuario="ngModel"
+      required
+    />
+    <!-- Ele tem outro atributo interessante, que é o touched - que informa se o usuário passou pelo campo. -->
+    <app-mensagem *ngIf="campoUsuario.invalid && campoUsuario.touched" mensagem="Usuario obrigarótio"></app-mensagem>
+  </div>
+  <div class="form-group">
+    <input
+      class="form-control mb-2"
+      type="password"
+      placeholder="Senha"
+      [(ngModel)]="senha"
+      name="senha"
+      #campoSenha="ngModel"
+      required
+    />
+    <app-mensagem *ngIf="campoSenha.invalid && campoUsuario.touched" mensagem="Senha Obrigatória"></app-mensagem>
+  </div>
+  <!-- Essa propriedade vai ser dinâmica, ela pode estar ligada ou desligada. Para eu atribuir uma expressão a uma propriedade do meu template, eu vou colocar o atributo ‘disabled’ entre colchetes, [disabled].
+
+  Depois eu vou colocar a minha expressão, eu quero que o meu loginForm seja válido ao invés de inválido – “[disabled]=“loginForm.invalid”, ou seja, se o invalid estiver true, se o meu formulário estiver inválido, ele vai estar disabled.
+  -->
+  <button class="btn btn-primary btn-block" type="submit" [disabled]="loginForm.invalid">Logar =)</button>
+</form>
+<!-- Caminho do modulo caso apenas queira que ele renderize outro componente e se eu quero que ele renderize toda uma pagina nova eu uso o caminho completo -->
+<p>Não é um usuario?<a [routerLink]="['/home/novo-usuario']"> Clique aqui!</a></p>

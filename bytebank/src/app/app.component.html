@@ -1,0 +1,19 @@
+<!-- A execução do componente app-nova-tranferia começa por aqui -->
+<!-- Event Bind -->
+<!-- O que está acontecendo nesta linha abaixo é que quando o Event Bind "aoTransferir" for executao, este componente vai execula-o jenuinamente e vai tranferir o valor/objeto do evento ocorrido para uma variavel do Angular chamada $event -->
+<!-- <app-nova-tranferencia
+  (aoTransferirComErros)="exibirMensagemDeErro($event)">
+</app-nova-tranferencia> -->
+
+<!-- Estou pegando a propriedade transferencia, que está dentro de app.component, estou passando via property bind para a propriedade transferencia do meu componente de extrato. Então essa propriedade transferencia de app.component não é a mesma de extrato.component. A que eu quero enxergar de verdade é o input transferência do tipo any (@input() transferencia: any;).
+
+A propriedade transferencia de app.component esta recebendo este evento atraves do metodo transferir() -->
+<!-- <app-extrato [mensagemDeErro]="mensagemDeErro"></app-extrato> -->
+
+<header>
+  <a routerLink="extrato" routerLinkActive="ativo">Transferencias</a>
+  <a routerLink="nova-transferencia" routerLinkActive="ativo">Nova Transferencia</a>
+</header>
+<main>
+  <router-outlet></router-outlet>
+</main>

@@ -1,0 +1,38 @@
+
+<section class="container">
+  <h2 class="titulo">Transferencias</h2>
+  <section class="container">
+    <p id="mensagem-erro">Mensagem: {{ mensagemDeErro}}</p>
+    <table class="tabela">
+      <thead class="tabela__cabecalho">
+        <th class="tabela__cabecalho__conteudo">Data</th>
+        <th class="tabela__cabecalho__conteudo">Valor</th>
+        <th class="tabela__cabecalho__conteudo">Destino</th>
+      </thead>
+      <!-- EStou verificano se esta variavel não está vazia. -->
+      <tbody *ngIf="transferencias?.length > 0; else listaVazia">
+        <tr class="tabela__linha" *ngFor="let transferencia of transferencias">
+          <!-- O angular tem uma funcionalidade chamada pipe, que formata um texto com diversos padrões que eles mesmo criam-->
+          <th class="tabela__conteudo">{{ transferencia?.data | date: "short" }}</th>
+          <th class="tabela__conteudo">{{ transferencia?.valor | currency }}</th>
+          <th class="tabela__conteudo">{{ transferencia?.destino }}</th>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+  <!-- Se o if de tbody não for verdadeiro ele em vez disso renderiza o que tem dentro de ng-template -->
+  <ng-template #listaVazia>
+    <p>Nenhuma operação cadastrada!</p>
+  </ng-template>
+
+  <!-- Com interpolação eu consigo executar codigo java script, sem a necessidade da tag script. -->
+  <!-- Obs: Os valores são do componente raiz, neste caso é o app.component o componente principal -->
+  <!-- Coloquei o inerrogação na frente do objeto por que eu quero que eles seja opcional, porque eu sei que este dado vai ser preenchido e quando o app iniciar ele vai rodar este codigo, mas como ele é opcional não vai dar erro.-->
+  <!--
+    <div *ngFor="let transferencia of transferencias">
+      <p>Valor: {{ transferencia?.valor }}</p>
+      <p>Destino: {{ transferencia?.destino }}</p>
+      <p>Data: {{ transferencia?.data }}</p>
+    </div>
+  -->
+</section>

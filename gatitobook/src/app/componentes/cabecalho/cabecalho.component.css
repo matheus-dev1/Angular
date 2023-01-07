@@ -1,0 +1,10 @@
+a:hover {
+  cursor:pointer;
+ }
+i:hover {
+  cursor:pointer;
+ }
+ a {
+  border: 0;
+  outline : none;
+}

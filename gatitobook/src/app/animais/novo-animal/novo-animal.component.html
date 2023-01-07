@@ -1,0 +1,91 @@
+<div class="contianer">
+  <form class="row" [formGroup]="formNovoAnimal" (submit)="upload()">
+    <div class="col-md-6 text-center">
+      <div class="form-group" *ngIf="!previewUrlUpload; else previewImage">
+        <button
+          class="btn btn-primary"
+          type="button"
+          (click)="arquivoInput.click()"
+        >
+          <i class="fa fa-image fa-4x align-middle"></i>
+        </button>
+        <!-- type="file" - Recebe o caminho do arquivo que você quer fazer upload e abre o explorador de arquivos do seu SO.
+
+          #arquivoInput - Variavel do elemento, possibiliando que o nosso template possa fazer as ações dele ou colocar coisas ele a partir dessa variavel. Exemplo posso pegar a variavel dele e simular um click em outro componente button.
+
+          hidden="true" - Eu quero que este elemento fice oculto.
+
+          formControlName="arquivo" - Estou armazendo as informaçoes deste input em uma variavel chamada arquivo para que eu possa manipular ela no meu component.ts
+
+          accept="image/*" - Quais tipos de arquivos o input aceita.
+
+          (change)="gravaArquivo($event.target)" - Neste exemplo ele fica monitorando cada alteração que este elemento(input) está sofrendo e executa a função gravaArquivo, passando como parametro o $event.target, que é as informações passadas deste elemento para o metodo gravaArquivo() -->
+        <input
+          #arquivoInput
+          type="file"
+          hidden
+          formControlName="arquivo"
+          accept="image/*"
+          (change)="gravaArquivo($event.target)"
+        />
+        <app-mensagem
+          mensagem="Por favor selecione uma imagem"
+          *ngIf="!!formNovoAnimal.get('arquivo')?.errors?.['required']">
+        </app-mensagem>
+      </div>
+      <ng-template #previewImage>
+        <app-animal
+          [urlImage]="previewUrlUpload"
+          [descricaoImage]="'Preview da imagem'">
+        </app-animal>
+      </ng-template>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <textarea
+          formControlName="description"
+          class="form-control form-control-sm"
+          placeholder="Descrição do Animal"
+        >
+        </textarea>
+        <app-mensagem
+          mensagem="Tamanho máximo do campo descrição é de 300 caracteres"
+          *ngIf="!!formNovoAnimal.get('description')?.errors?.['maxLenght']"
+        >
+        </app-mensagem>
+      </div>
+      <div class="form-group">
+        <label class="text-muted">
+          Permite comentário
+          <input
+            type="checkbox"
+            formControlName="allowComments"
+          />
+        </label>
+      </div>
+
+      <div *ngIf="!pencentualUpload; else uploaddiv">
+        <button
+          [disabled]="formNovoAnimal.invalid"
+          type="submit"
+          class="btn btn-primary btn-block"
+        >
+        Enviar
+        </button>
+
+        <a
+          [routerLink]="['']"
+          class="btn btn-secondary btn-block"
+        >
+        Cancelar
+        </a>
+      </div>
+      <ng-template #uploaddiv>
+        <div class="text-center display-4">
+          Percentual de upload {{ pencentualUpload }} %
+        </div>
+      </ng-template>
+    </div>
+  </form>
+</div>

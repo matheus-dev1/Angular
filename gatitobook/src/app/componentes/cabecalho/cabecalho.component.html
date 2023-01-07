@@ -1,0 +1,37 @@
+<header class="sticky-top">
+  <nav class="navbar navbar-light bg-white">
+    <a class="navbar-brand">
+      <!-- Usando a variavel/referencia "#menu" para acessar os metodos e atributos do template de menu -->
+      <i
+        class="fa fa-bars mr-2"
+        (click)="menu.abreMenu()"
+        (keyup.space)="menu.abreMenu()"
+      >
+      </i>
+      Gatito Book
+    </a>
+    <!-- Aqui eu criei uma referencia/variavel do template de app-enu, que pode ser usado no template de cabecalho-->
+    <app-menu #menu>
+      <ul class="list-unstyled">
+        <li>
+          <!-- Vou para a rota animais/novo-->
+          <a [routerLink]="['animais', 'novo']">Novo Animal</a>
+        </li>
+      </ul>
+    </app-menu>
+    <!-- pipe async, que é um método de desenvelopar, de pegar a informação do observable no própio template sem precisar dar um subscribe. -->
+    <div *ngIf="user$ | async as user">
+      <div *ngIf="user.name; else login">
+        <i class="fa fa-user-circle mr-1">&nbsp;</i>
+        <a class="mr-1">&nbsp;|&nbsp;{{ user.name }}</a>
+        <a (click)="deslogar()">&nbsp;|&nbsp;Deslogar</a>
+      </div>
+    </div>
+  </nav>
+
+  <ng-template #login>
+    <span class="navbar-text">
+      <a [routerLink]="['/home/login']">Login</a>
+    </span>
+  </ng-template>
+</header>

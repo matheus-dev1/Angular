@@ -1,0 +1,42 @@
+<section class="container">
+  <!-- Dentro do paranteses eu posso colocar uma evento, como eu importei a api de formularios, eu tenho mais opções do que as opções de eventos normais -->
+  <form class="formulario" (ngSubmit)="transferir()">
+    <h2 class="formulario__titulo">Nova Transferência</h2>
+
+    <div class="form-field">
+      <label class="form-field__label" for="valor">Valor</label>
+      <!--
+        As diretivas são marcadores em um elemento DOM (como um atributo) que informam ao Angular para anexar um comportamento especificado a um elemento existente.
+
+        As diretivas existem desde o AngularJS; na nova versão são usadas com componentes, principalmente para criar tags personalizadas em uma aplicação Angular.
+
+        Se digito ngModel dessa maneira simples, só o texto, ele espera que esteja passando uma string, e não quero passar uma string, quero passar uma variável. Então preciso usar os binds do Angular de propriedades para poder passar esse valor.
+
+        Para usar este bind eu seleciono ngModel e apertei colchetes, e vou colocar também mais um parênteses.
+      -->
+      <input class="form-field__input" id="valor" type="number" name="valor" [(ngModel)]="valor">
+    </div>
+
+    <div class="form-field">
+      <label class="form-field__label" for="destino">Destino</label>
+      <!--
+      A propriedade [ngModelOptions]="{standalone: true}" dizendo que esse é um campo solitário, eu não vou precisar escutar muitas alterações.
+
+      Meu campo "valor", está usando o two-way databinding, e meu segundo campo, meu campo de "destino", está usando apenas o property bind. O two-way databinding garante que o valor seja transmitido tanto do componente para o template, quanto do template para o componente.
+
+      Property binding permite que um valor de uma variável seja atribuído ao elemento HTML.
+      Two-way data binding garante uma comunicação bidirecional entre o componente e o DOM.
+      Event binding permite que um evento do DOM seja atribuído a um método do componente.
+      -->
+      <input class="form-field__input" id="valor" type="text" name="destino" [(ngModel)]="destino">
+    </div>
+
+    <div class="botao-wrapper">
+      <button class="botao" type="submit">Transferir</button>
+    </div>
+    <br/>
+    <div class="botao-wrapper">
+      <button class="botao" (click)="limparCampos()">Limpar Campos</button>
+    </div>
+  </form>
+</section>

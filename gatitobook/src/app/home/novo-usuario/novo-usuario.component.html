@@ -1,0 +1,78 @@
+<h4 class="text-center">Registre-se e mostre seu pet ao mundo</h4>
+<form class="form mt-4" [formGroup]="novoUsuarioForm" (submit)="cadastrar()">
+  <div class="form-group">
+    <input
+      class="form-control mb-2"
+      placeholder="E-mail"
+      type="email"
+      formControlName="email"
+    />
+    <!-- O que é o safe navigation? Ao invés de fazer um if, se existe faça. O TypeScript deixou isso mais fácil utilizando ?. -->
+    <app-mensagem
+      *ngIf="
+        novoUsuarioForm.get('email')?.errors?.['required'] &&
+        novoUsuarioForm.get('email')?.touched"
+      mensagem="E-mail Obrigatório">
+    </app-mensagem>
+    <app-mensagem
+      *ngIf="
+        novoUsuarioForm.get('email')?.errors?.['email'] &&
+        novoUsuarioForm.get('email')?.touched"
+      mensagem="E-mail no formato incorreto">
+    </app-mensagem>
+  </div>
+
+  <div class="form-group">
+    <input
+      class="form-control mb-2"
+      placeholder="Nome Completo"
+      type="text"
+      formControlName="fullName"
+    />
+    <app-mensagem
+      *ngIf="
+        novoUsuarioForm.get('fullName')?.errors &&
+        novoUsuarioForm.get('fullname')?.touched"
+      mensagem="Nome incorreto">
+    </app-mensagem>
+  </div>
+
+  <div class="form-group">
+    <input
+      class="form-control mb-2"
+      placeholder="Usuario"
+      type="text"
+      formControlName="userName"
+    />
+    <!-- Se este input tiver um erro, referente as declarações no formBuilder, ele vai entrar na validação, fazer a validão e retornar algo. Neste caso se por exemplo e colocar uma letra maisucula ele vai observar o objeto "minusculo" e verificar qual é o valor de retorno dele, se for null, ele não exibe a mensagem, se for true ele exibe a mensamge. -->
+    <app-mensagem
+      *ngIf="
+        novoUsuarioForm.get('userName')?.errors?.['minusculo'] &&
+        novoUsuarioForm.get('userName')?.touched"
+    mensagem="Usuario deve conter apenas letras minusculas">
+    </app-mensagem>
+    <app-mensagem
+      *ngIf="
+        novoUsuarioForm.get('userName')?.errors?.['usuarioExistente']"
+      mensagem="Usuario já existe">
+    </app-mensagem>
+  </div>
+
+  <div class="form-group">
+    <input
+      class="form-control mb-2"
+      placeholder="Senha"
+      type="password"
+      formControlName="password"
+    />
+    <!-- Eu não vou fazer nenhum ‘get’ porque eu não estou pegando um erro do campo, eu estou pegando um erro do formulário inteiro. -->
+    <app-mensagem
+      *ngIf="novoUsuarioForm.errors?.['senhaIgualUsuario']"
+      mensagem="Senha deve ser diferente do usuário"
+    >
+    </app-mensagem>
+  </div>
+
+  <button class="btn btn-primary btn-block">Cadastro</button>
+</form>
+<p>Já possui cadastro?<a [routerLink]="['/home/login']"> Clique aqui!</a></p>

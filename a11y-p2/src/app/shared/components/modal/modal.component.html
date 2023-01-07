@@ -1,0 +1,26 @@
+<div
+  class="modal-overlay"
+  (click)="modalRef.close()"
+>
+  <div
+    appFocusTrapDirective
+    appFocusBackDirective
+    class="modal-content"
+    role="dialog"
+    [attr.aria-label]="modalConfig.title"
+    aria-modal="true"
+    (click)="$event.stopPropagation()"
+    (keydown.esc)="modalRef.close()"
+  >
+    <h1
+      class="modal-title"
+    >
+      {{ modalConfig.title }}
+    </h1>
+    <!-- O nosso modal vai ser renderizado neste ng-container, e nos conseguimos fazer isso atraves da diretiva *ngComponentOutlet -->
+    <ng-container
+      *ngTemplateOutlet="modalConfig.templateRef"
+    >
+    </ng-container>
+  </div>
+</div>

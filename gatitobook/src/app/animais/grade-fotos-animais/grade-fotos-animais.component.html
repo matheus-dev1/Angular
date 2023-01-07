@@ -1,0 +1,24 @@
+<p class="text-center text-muted" *ngIf="!animais.length">
+  Desculpe não há animais :(
+</p>
+
+<div class="row">
+  <div *ngFor="let animal of animais" class="col-4">
+    <!-- Redirecionando para /animais/id que o id é o numero de identificação da imagem. -->
+    <a [routerLink]="['/animais', animal.id]">
+      <app-cartao [titulo]="'teste'">
+        <!-- O que vai dentro do ng-content é o que está dentro da tag app-cartao, no caso o app-animal-->
+        <app-animal
+          [urlImage]="animal.url"
+          [descricaoImage]="animal.description">
+        </app-animal>
+        <i aria-hidden="true" class="fa fa-heart-o fa-1x mr-2">
+          {{ animal.likes }}
+        </i>
+        <i aria-hidden="true" class="fa fa-comment-o fa-1x mr-2 ml-2">
+          {{ animal.comments }}
+        </i>
+      </app-cartao>
+    </a>
+  </div>
+</div>
